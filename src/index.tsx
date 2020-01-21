@@ -1,16 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import Container from './Container';
 import * as serviceWorker from './serviceWorker';
-import arrivals from 'arrivals'
-import line from 'line'
+
 
 ReactDOM.render(
-    const abc = line;
-    console.log(abc);
-    
-    <App props={...arrivals} />,
+    <Container />,
      document.getElementById('root')
      );
 

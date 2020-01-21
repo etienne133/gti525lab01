@@ -1,12 +1,10 @@
 import React, {FC} from 'react'
-interface Idata {
-    arrivals?:any; 
-    lines?:any;
-    stops:any;
-    handleClick: (event: React.MouseEvent<HTMLElement>)=>void;   
-  } 
 
-const app:FC<Idata> = ({handleClick}) =>{
+export interface patate {
+  handleClick: (event: React.MouseEvent<HTMLElement>)=>void;   
+} 
+
+const app:FC<patate> = ({handleClick}) =>{
     return (
         <div className="App">
           <div>
@@ -21,7 +19,7 @@ const app:FC<Idata> = ({handleClick}) =>{
                 className='box'
                 onClick={handleClick}
               >
-    
+                
               </div>
             </div>
           </div>

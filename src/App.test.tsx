@@ -1,5 +1,5 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import App from "./App";
+import Container from "./Container";
 
 export const a = 1;
