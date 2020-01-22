@@ -1,7 +1,8 @@
 import React, {FC} from 'react'
 
 export interface patate {
-  handleClick: (event: React.MouseEvent<HTMLElement>)=>void;   
+  handleClick: (event: React.MouseEvent<HTMLElement>)=>void;
+     
 } 
 
 const app:FC<patate> = ({handleClick}) =>{
