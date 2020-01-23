@@ -15,7 +15,7 @@ export interface IAppState {
 
 
 export interface category {
-  //lines:line[]; 
+  lines:line[]; 
   name:string;
 } 
 
@@ -34,19 +34,30 @@ export interface stop{
 
 export interface arrival{
 
-}  
+}
+
+const reducer = (accumulator:string[], currentValue:string) => accumulator.push(currentValue);
 
 class Container extends React.Component<any>
 {
   constructor(props:any) {
     super(props);
     const line:line[] = linesFile.map(x=>x)
-    const categories:category[] = linesFile.map<category>((key)=>({
-      name:key.name
-    }))
+    // const categories:category[] = linesFile.map<category>(
+    //   (key)=>({
+    //     name:key.name
+        
+    // }))
+    const categories2:category[] = linesFile.reduce<any>(
+      (acc, curr)=>{
+        if(!acc[curr.category]) acc[curr.category] = []; //If this type wasn't previously stored
+        acc[curr.category].push(curr);
+        return acc;
+    },{})
+    console.log(categories2);  
      //retursn
-    console.log(line)
-    console.log(categories)
+    //console.log(line)
+    //console.log(categories)
     // const abc:IAppState =  { 
     //   arrivals:arrivals, 
     //   lines:lines,

@@ -9,7 +9,7 @@ const app:FC<patate> = ({handleClick}) =>{
     return (
         <div className="App">
           <div>
-            GSAR2020 
+            AAAaaa111 
           </div>
           <div className="top-section">
             <img /> <img />
