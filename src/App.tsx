@@ -36,19 +36,21 @@ const app:FC<patate> = ({handleClick}) =>{
                 {/* TODO: Dynamic table text */}
                 <span>10 De Lorimier - SUD</span>
                 <table>
-                  <tr>
-                    <th>Arrêt</th>
-                    <th>Code</th>
-                    <th>Horaire</th>
-                    <th>Favoris</th>
-                  </tr>
-                  <tr>
-                    {/* TODO: Dynamic data */}
-                    <td>De Lorimier / Crémazie</td>
-                    <td>51133</td>
-                    <td>[ ... ]</td>
-                    <td>+</td>
-                  </tr>
+                  <tbody>
+                    <tr>
+                      <th>Arrêt</th>
+                      <th>Code</th>
+                      <th>Horaire</th>
+                      <th>Favoris</th>
+                    </tr>
+                    <tr>
+                      {/* TODO: Dynamic data */}
+                      <td>De Lorimier / Crémazie</td>
+                      <td>51133</td>
+                      <td>[ ... ]</td>
+                      <td>+</td>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
 
