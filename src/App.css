@@ -58,6 +58,10 @@ ul {
   margin: 5px auto;
 }
 
+.list-item {
+  font-size: 10px;
+}
+
 .table-container {
   width: 63%;
 }

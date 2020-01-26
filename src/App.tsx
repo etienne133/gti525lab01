@@ -1,12 +1,33 @@
 import React, {FC} from 'react'
 import './App.css'
+import { line, CategoryTypes, category } from './Container';
 
 export interface patate {
   handleClick: (event: React.MouseEvent<HTMLElement>)=>void;
+  map: Map<string, line[]>;
      
 } 
 
-const app:FC<patate> = ({handleClick}) =>{
+/** hardcoded fn to group by same id */
+function formatForMenu(list: line[]): line[] {
+  const result: line[] = [];
+  list.forEach(x => {
+    const sameLine = result.find(y => x.id === y.id);
+    if (sameLine) {
+      sameLine.direction += `, ${x.direction}`;
+    }
+    else {
+      result.push(x);
+    }
+  })
+
+  return result;
+}
+
+const app:FC<patate> = ({handleClick, map}) =>{
+    const locals = formatForMenu(map.get(CategoryTypes.LOCAL)!);
+    const localsComputed = locals?.map(x => `- ${x.id} ${x.name} (${x.direction.toLocaleUpperCase()})`)
+
     return (
         <div className="App">
           <div className="wrapper">
@@ -21,7 +42,9 @@ const app:FC<patate> = ({handleClick}) =>{
                 <span className="list-el">Toutes les lignes</span>
                 <ul></ul>
                 <span className="list-el">Réseau local</span>
-                <ul></ul>
+                <ul>
+                {localsComputed?.map((x, index) => {return <li key={index} className="list-item">{x}</li>})}
+                </ul>
                 <span className="list-el">Réseau de nuit</span>
                 <ul></ul>
                 <span className="list-el">Réseau express</span>

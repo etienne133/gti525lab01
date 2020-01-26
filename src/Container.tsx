@@ -46,13 +46,13 @@ export interface arrival{
 
 const reducer = (accumulator:string[], currentValue:string) => accumulator.push(currentValue);
 
-class Container extends React.Component<any>
+class Container extends React.Component<{}, {line: line[], lineMap: Map<string, line[]>}>
 {
   constructor(props: any) {
     super(props);
     this.state = {
       line: [],
-      lineMap : new Map<string, category>()
+      lineMap : new Map<string, line[]>()
     }
   }
 
@@ -62,9 +62,6 @@ class Container extends React.Component<any>
 
 
   componentWillMount(){
-
-  }
-  componentDidMount() {
     const line:line[] = linesFile.map(x=>x)
     // const categories:category[] = linesFile.map<category>(
     //   (key)=>({
@@ -79,13 +76,13 @@ class Container extends React.Component<any>
     },{});
     console.log('CATEGORIES v2', categories2);  
 
-    const categories3: Map<string, category[]> = linesFile.reduce<any>(
-      (map: Map<string, category[]>, current: any) => {
+    const categories3: Map<string, line[]> = linesFile.reduce<any>(
+      (map: Map<string, line[]>, current: any) => {
         if (!map.has(current.category)) map.set(current.category, []);
-        const array = map.get(current.category) as category[];
+        const array = map.get(current.category) as line[];
         array.push(current);
         return map.set(current.category, array);
-      }, new Map<string, category[]>());
+      }, new Map<string, line[]>());
 
     Object.values(CategoryTypes).forEach(x => console.log('CATEGORIES v3 -', `${x}:`, categories3.get(x)));
 
@@ -100,13 +97,14 @@ class Container extends React.Component<any>
     //lecture des fichier et mapping ici. 
     
 
-    this.setState({line, lineMap: categories3});
+    this.setState({line, lineMap: categories3}, () => this.render());
     //this.handleClick = this.handleClick.bind(this);
   }
+  componentDidMount() {}
 
 
   render() {
-    return <App {...this.state} handleClick={this.handleClick}/>
+    return <App {...this.state} handleClick={this.handleClick} map={this.state.lineMap} />
   }
 };
 
