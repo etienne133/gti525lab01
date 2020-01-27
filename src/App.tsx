@@ -1,40 +1,28 @@
-import React, {FC} from 'react'
+import React, {FC, useEffect, useState} from 'react'
 import './App.css'
 import { line, CategoryTypes } from './Container';
 
 export interface patate {
   handleClick: (event: React.MouseEvent<HTMLElement>)=>void;
   map: Map<string, line[]>;
-     
-} 
-
-/** hardcoded fn to group by same id */
-function formatForMenu(list: line[]): string[] {
-  const result: line[] = [];
-  list.forEach(x => {
-    const sameLine = result.find(y => x.id === y.id);
-    if (sameLine) {
-      sameLine.direction += `, ${x.direction}`;
-    }
-    else {
-      result.push(x);
-    }
-  })
-
-  return result.map(x => `- ${x.id} ${x.name} (${x.direction.toLocaleUpperCase()})`);
 }
 
-const app:FC<patate> = ({handleClick, map}) =>{
-    const locals = formatForMenu(map.get(CategoryTypes.LOCAL)!);
-    const night = formatForMenu(map.get(CategoryTypes.NIGHT)!);
-    const express = formatForMenu(map.get(CategoryTypes.EXPRESS)!);
-    const shuttle = formatForMenu(map.get(CategoryTypes.DEDICATED)!);
-    const shuttleOr = formatForMenu(map.get(CategoryTypes.SHUTTLE_OR)!);
-    const all = locals.concat(night, express, shuttle, shuttleOr).sort((a, b) => {
-      // sort by id since lines were separated in different groups
-      // regex finds the first number in string
-      return a.replace( /(^.+)(\w\d+\w)(.+$)/i,'$2') > b.replace( /(^.+)(\w\d+\w)(.+$)/i,'$2') ? 1 : -1;
-    })
+
+const APP:FC<patate> = ({handleClick, map}) =>{
+    const locals = map.get(CategoryTypes.LOCAL);
+    const night = map.get(CategoryTypes.NIGHT);
+    const express = map.get(CategoryTypes.EXPRESS);
+    const shuttle = map.get(CategoryTypes.DEDICATED);
+    const shuttleOr = map.get(CategoryTypes.SHUTTLE_OR);
+
+    const [showLocal, toggleLocal] = useState(false);
+    const [showNight, toggleNight] = useState(false);
+    const [showExpress, toggleExpress] = useState(false);
+    const [showShuttle, toggleShuttle] = useState(false);
+    const [showShuttleOr, toggleShuttleOr] = useState(false);
+
+    useEffect(() => {
+    });
 
     return (
         <div className="App">
@@ -47,18 +35,18 @@ const app:FC<patate> = ({handleClick, map}) =>{
             <div className="main">
               <div className="main-section list">
                 {/* TODO: dynamically fill <ul/>'s */}
-                <span className="list-el">Toutes les lignes</span>
-                <ul>{all?.map((x, index) => {return <li key={index} className="list-item">{x}</li>})}</ul>
-                <span className="list-el">Réseau local</span>
-                <ul>{locals?.map((x, index) => {return <li key={index} className="list-item">{x}</li>})}</ul>
-                <span className="list-el">Réseau de nuit</span>
-                <ul>{night?.map((x, index) => {return <li key={index} className="list-item">{x}</li>})}</ul>
-                <span className="list-el">Réseau express</span>
-                <ul>{express?.map((x, index) => {return <li key={index} className="list-item">{x}</li>})}</ul>
-                <span className="list-el">Navettes</span>
-                <ul>{shuttle?.map((x, index) => {return <li key={index} className="list-item">{x}</li>})}</ul>
-                <span className="list-el">Navettes Or</span>
-                <ul>{shuttleOr?.map((x, index) => {return <li key={index} className="list-item">{x}</li>})}</ul>
+                {/* <span className="list-el" onClick={() => toggleMenu(!showAll)}>Toutes les lignes</span>
+                <ul>{all?.map((x, index) => {return <li key={index} className="list-item">{x}</li>})}</ul> */}
+                <span className="list-el" onClick={() => toggleLocal(!showLocal)}>Réseau local</span>
+                <ul>{locals!.map((x, index) => {return showLocal ? <li key={index} className="list-item">{`${x.id} - ${x.name} (${x.direction})`}</li> : ''})}</ul>
+                <span className="list-el" onClick={() => toggleNight(!showNight)}>Réseau de nuit</span>
+                <ul>{night?.map((x, index) => {return showNight ? <li key={index} className="list-item">{`${x.id} - ${x.name} (${x.direction})`}</li> : ''})}</ul>
+                <span className="list-el" onClick={() => toggleExpress(!showExpress)}>Réseau express</span>
+                <ul>{express?.map((x, index) => {return showExpress ? <li key={index} className="list-item">{`${x.id} - ${x.name} (${x.direction})`}</li> : ''})}</ul>
+                <span className="list-el" onClick={() => toggleShuttle(!showShuttle)}>Navettes</span>
+                <ul>{shuttle?.map((x, index) => {return showShuttle ? <li key={index} className="list-item">{`${x.id} - ${x.name} (${x.direction})`}</li> : ''})}</ul>
+                <span className="list-el" onClick={() => toggleShuttleOr(!showShuttleOr)}>Navettes Or</span>
+                <ul>{shuttleOr?.map((x, index) => {return showShuttleOr ? <li key={index} className="list-item">{`${x.id} - ${x.name} (${x.direction})`}</li> : ''})}</ul>
               </div>
 
               <div className="main-section table-container">
@@ -97,4 +85,4 @@ const app:FC<patate> = ({handleClick, map}) =>{
         </div>
       );
 } 
-export default app;
+export default APP;
