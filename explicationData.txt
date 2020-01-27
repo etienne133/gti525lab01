@@ -1,0 +1,62 @@
+ArrivalJson
+
+ex:
+{   
+    "146-E-50372":[ 
+      "0549", 
+      "0619",
+      "0650",
+      "0704",
+      "0718",
+      "0734",
+   ],
+}
+
+
+explained:
+    "numerodebus-direction-stopID":[
+        "heureFormatMilitaire"
+    ]
+
+___________________________________________________________
+Lines Json
+
+ex:
+[ 
+   { 
+      "category":"local",
+      "direction":"Sud",
+      "id":"10",
+      "name":"De Lorimier"
+   },
+   { 
+      "category":"local",
+      "direction":"Nord",
+      "id":"10",
+      "name":"De Lorimier"
+   },
+]
+
+___________________________________________________________
+Stopsjson
+ex:
+{
+   "364-W":[ 
+      { 
+         "accessible":false,
+         "lon":"-73.582026 ",
+         "lat":"45.618998  ",
+         "id":"54696",
+         "name":"Centre de transport Anjou"
+      },
+   ]
+}
+
+
+ligne-direction:[
+   
+   //un stop
+   {
+      id:(dustop)
+   }
+]
