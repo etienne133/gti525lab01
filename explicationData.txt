@@ -1,0 +1,41 @@
+ArrivalJson
+
+ex:
+{   
+    "146-E-50372":[ 
+      "0549", 
+      "0619",
+      "0650",
+      "0704",
+      "0718",
+      "0734",
+   ],
+}
+
+
+explained:
+    "numerodebus-direction-kkc?":[
+        "heureFormatMilitaire"
+    ]
+
+___________________________________________________________
+Lines Json
+
+ex:
+[ 
+   { 
+      "category":"local",
+      "direction":"Sud",
+      "id":"10",
+      "name":"De Lorimier"
+   },
+   { 
+      "category":"local",
+      "direction":"Nord",
+      "id":"10",
+      "name":"De Lorimier"
+   },
+]
+
+___________________________________________________________
+Stopsjson
