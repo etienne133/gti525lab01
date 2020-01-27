@@ -44,6 +44,8 @@ export interface arrival{
 
 }
 
+
+
 const reducer = (accumulator:string[], currentValue:string) => accumulator.push(currentValue);
 
 class Container extends React.Component<{}, {line: line[], lineMap: Map<string, line[]>}>
@@ -55,6 +57,7 @@ class Container extends React.Component<{}, {line: line[], lineMap: Map<string, 
       lineMap : new Map<string, line[]>()
     }
   }
+
 
   handleClick = (e:React.MouseEvent) => {
     
@@ -100,8 +103,16 @@ class Container extends React.Component<{}, {line: line[], lineMap: Map<string, 
     this.setState({line, lineMap: categories3}, () => this.render());
     //this.handleClick = this.handleClick.bind(this);
   }
-  componentDidMount() {}
+  componentDidMount() {
+    this.refresh()
+  }
 
+  refresh = ():void => {
+    setTimeout( () =>  {
+      console.log("TIC")
+      return this.refresh() 
+    }, 5000);
+  } 
 
   render() {
     return <App {...this.state} handleClick={this.handleClick} map={this.state.lineMap} />
