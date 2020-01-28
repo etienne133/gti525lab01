@@ -207,8 +207,8 @@ const APP: FC<patate> = ({ handleClick, map, categories }) => {
               })}
             </ul>
           </div>
-          <div>
-              {/* {categories &&
+          {/* <div>
+              {categories &&
                 Object.entries(categories).map((x, i) => {
                   return (
                     <>
@@ -223,8 +223,8 @@ const APP: FC<patate> = ({ handleClick, map, categories }) => {
                         }))}
                     </>
                   );
-                })} */}
-          </div>
+                })}
+          </div> */}
           <div className="main-section table-container">
             {/* TODO: Dynamic table text */}
             <table>
