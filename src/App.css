@@ -59,9 +59,13 @@ ul {
   cursor: pointer;
 }
 
-.list-el:hover {
+.active {
   background-color: blue;
   color: white;
+}
+
+.active + ul > .list-item {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .list-item {
