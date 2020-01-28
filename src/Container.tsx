@@ -105,6 +105,7 @@ class Container extends React.Component<{}, {line: line[], lineMap: Map<string, 
   refresh = ():void => {
     setTimeout( () =>  {
       console.log("TIC")
+      this.setState({categories2:fetchData()})
       return this.refresh() 
     }, 5000);
   } 
