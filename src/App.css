@@ -59,10 +59,31 @@ ul {
   cursor: pointer;
 }
 
-.active {
+.all.active {
   background-color: blue;
   color: white;
 }
+.local.active {
+  background-color: orange;
+  color: white;
+}
+.night.active {
+  background-color: purple;
+  color: white;
+}
+.express.active {
+  background-color: red;
+  color: white;
+}
+.shuttle.active {
+  background-color: lime;
+  color: black;
+}
+.shuttleor.active {
+  background-color: gold;
+  color: black;
+}
+
 
 .active + ul > .list-item {
   background-color: rgba(0, 0, 0, 0.2);
