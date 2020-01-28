@@ -9,7 +9,7 @@ export interface patate {
 } 
 
 
-const APP:FC<patate> = ({handleClick, map}) =>{
+const APP:FC<patate> = ({handleClick, map,categories}) =>{
     const locals = map.get(CategoryTypes.LOCAL);
     const night = map.get(CategoryTypes.NIGHT);
     const express = map.get(CategoryTypes.EXPRESS);
@@ -89,8 +89,8 @@ const APP:FC<patate> = ({handleClick, map}) =>{
               <div>
               <div className="main-section list">
                 abc
-          {categories && categories.map((x,i) => {return (
-          <span className="list-el">
+            {categories && categories.map((x,i) => {return (
+            <span className="list-el">
             {x.childrens}
           </span>)})}
               </div>
