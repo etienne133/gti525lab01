@@ -15,11 +15,7 @@ const APP:FC<patate> = ({handleClick, map}) =>{
     const shuttle = map.get(CategoryTypes.DEDICATED);
     const shuttleOr = map.get(CategoryTypes.SHUTTLE_OR);
 
-    const [showLocal, toggleLocal] = useState(false);
-    const [showNight, toggleNight] = useState(false);
-    const [showExpress, toggleExpress] = useState(false);
-    const [showShuttle, toggleShuttle] = useState(false);
-    const [showShuttleOr, toggleShuttleOr] = useState(false);
+    const [showLine, setLine] = useState('');
 
     useEffect(() => {
     });
@@ -37,16 +33,16 @@ const APP:FC<patate> = ({handleClick, map}) =>{
                 {/* TODO: dynamically fill <ul/>'s */}
                 {/* <span className="list-el" onClick={() => toggleMenu(!showAll)}>Toutes les lignes</span>
                 <ul>{all?.map((x, index) => {return <li key={index} className="list-item">{x}</li>})}</ul> */}
-                <span className="list-el" onClick={() => toggleLocal(!showLocal)}>Réseau local</span>
-                <ul>{locals!.map((x, index) => {return showLocal ? <li key={index} className="list-item">{`${x.id} - ${x.name} (${x.direction})`}</li> : ''})}</ul>
-                <span className="list-el" onClick={() => toggleNight(!showNight)}>Réseau de nuit</span>
-                <ul>{night?.map((x, index) => {return showNight ? <li key={index} className="list-item">{`${x.id} - ${x.name} (${x.direction})`}</li> : ''})}</ul>
-                <span className="list-el" onClick={() => toggleExpress(!showExpress)}>Réseau express</span>
-                <ul>{express?.map((x, index) => {return showExpress ? <li key={index} className="list-item">{`${x.id} - ${x.name} (${x.direction})`}</li> : ''})}</ul>
-                <span className="list-el" onClick={() => toggleShuttle(!showShuttle)}>Navettes</span>
-                <ul>{shuttle?.map((x, index) => {return showShuttle ? <li key={index} className="list-item">{`${x.id} - ${x.name} (${x.direction})`}</li> : ''})}</ul>
-                <span className="list-el" onClick={() => toggleShuttleOr(!showShuttleOr)}>Navettes Or</span>
-                <ul>{shuttleOr?.map((x, index) => {return showShuttleOr ? <li key={index} className="list-item">{`${x.id} - ${x.name} (${x.direction})`}</li> : ''})}</ul>
+                <span className="list-el" onClick={() => setLine('local')}>Réseau local</span>
+                <ul>{locals!.map((x, index) => {return showLine === 'local' ? <li key={index} className="list-item">{`${x.id} - ${x.name} (${x.direction})`}</li> : ''})}</ul>
+                <span className="list-el" onClick={() => setLine('night')}>Réseau de nuit</span>
+                <ul>{night?.map((x, index) => {return showLine === 'night' ? <li key={index} className="list-item">{`${x.id} - ${x.name} (${x.direction})`}</li> : ''})}</ul>
+                <span className="list-el" onClick={() => setLine('express')}>Réseau express</span>
+                <ul>{express?.map((x, index) => {return showLine === 'express' ? <li key={index} className="list-item">{`${x.id} - ${x.name} (${x.direction})`}</li> : ''})}</ul>
+                <span className="list-el" onClick={() => setLine('shuttle')}>Navettes</span>
+                <ul>{shuttle?.map((x, index) => {return showLine === 'shuttle' ? <li key={index} className="list-item">{`${x.id} - ${x.name} (${x.direction})`}</li> : ''})}</ul>
+                <span className="list-el" onClick={() => setLine('shuttleOr')}>Navettes Or</span>
+                <ul>{shuttleOr?.map((x, index) => {return showLine === 'shuttleOr' ? <li key={index} className="list-item">{`${x.id} - ${x.name} (${x.direction})`}</li> : ''})}</ul>
               </div>
 
               <div className="main-section table-container">
