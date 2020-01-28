@@ -1,11 +1,12 @@
 import React, {FC, useEffect, useState} from 'react'
 import './App.css'
-import { line, CategoryTypes } from './Container';
+import { line, CategoryTypes, category } from './Container';
 
 export interface patate {
   handleClick: (event: React.MouseEvent<HTMLElement>)=>void;
   map: Map<string, line[]>;
-}
+  categories?: category[] 
+} 
 
 
 const APP:FC<patate> = ({handleClick, map}) =>{
@@ -85,10 +86,20 @@ const APP:FC<patate> = ({handleClick, map}) =>{
                     </li> : ''})}
                 </ul>
               </div>
+              <div>
+              <div className="main-section list">
+                abc
+          {categories && categories.map((x,i) => {return (
+          <span className="list-el">
+            {x.childrens}
+          </span>)})}
+              </div>
+              
+            
 
+              </div>
               <div className="main-section table-container">
                 {/* TODO: Dynamic table text */}
-                <span>{selectedLine}</span>
                 <table>
                   <tbody>
                     <tr>
