@@ -14,8 +14,10 @@ const APP:FC<patate> = ({handleClick, map}) =>{
     const express = map.get(CategoryTypes.EXPRESS);
     const shuttle = map.get(CategoryTypes.DEDICATED);
     const shuttleOr = map.get(CategoryTypes.SHUTTLE_OR);
+    const all = locals!.concat(night!).concat(express!).concat(shuttle!).concat(shuttleOr!);
 
     const [showLine, setLine] = useState('');
+    const [selectedLine, setSelectedLine] = useState('');
 
     return (
         <div className="App">
@@ -27,24 +29,66 @@ const APP:FC<patate> = ({handleClick, map}) =>{
             </div>
             <div className="main">
               <div className="main-section list">
-                {/* TODO: dynamically fill <ul/>'s */}
-                {/* <span className="list-el" onClick={() => toggleMenu(!showAll)}>Toutes les lignes</span>
-                <ul>{all?.map((x, index) => {return <li key={index} className="list-item">{x}</li>})}</ul> */}
+                {/* ALL */}
+                <span className={`list-el ${showLine === 'all' ? 'active' : ''}`} onClick={() => setLine('all')}>
+                  Toutes les lignes
+                </span>
+                <ul>{all!.map((x, index) => {
+                  return showLine === 'all' ?
+                    <li key={index} className="list-item" onClick={() => setSelectedLine(`${x.id} - ${x.name} (${x.direction})`)}>
+                      {`${x.id} - ${x.name} (${x.direction})`}
+                    </li> : ''})}
+                </ul>
+
+                {/* LOCAL */}
                 <span className={`list-el ${showLine === 'local' ? 'active' : ''}`} onClick={() => setLine('local')}>Réseau local</span>
-                <ul>{locals!.map((x, index) => {return showLine === 'local' ? <li key={index} className="list-item">{`${x.id} - ${x.name} (${x.direction})`}</li> : ''})}</ul>
+                <ul>{locals!.map((x, index) => {
+                  return showLine === 'local' ?
+                    <li key={index} className="list-item" onClick={() => setSelectedLine(`${x.id} - ${x.name} (${x.direction})`)}>
+                      {`${x.id} - ${x.name} (${x.direction})`}
+                    </li> : ''})}
+                </ul>
+
+                {/* NIGHT */}
                 <span className={`list-el ${showLine === 'night' ? 'active' : ''}`} onClick={() => setLine('night')}>Réseau de nuit</span>
-                <ul>{night?.map((x, index) => {return showLine === 'night' ? <li key={index} className="list-item">{`${x.id} - ${x.name} (${x.direction})`}</li> : ''})}</ul>
+                <ul>{night?.map((x, index) => {
+                  return showLine === 'night' ?
+                    <li key={index} className="list-item" onClick={() => setSelectedLine(`${x.id} - ${x.name} (${x.direction})`)}>
+                      {`${x.id} - ${x.name} (${x.direction})`}
+                    </li> : ''})}
+                </ul>
+
+                {/* EXPRESS */}
                 <span className={`list-el ${showLine === 'express' ? 'active' : ''}`} onClick={() => setLine('express')}>Réseau express</span>
-                <ul>{express?.map((x, index) => {return showLine === 'express' ? <li key={index} className="list-item">{`${x.id} - ${x.name} (${x.direction})`}</li> : ''})}</ul>
+                <ul>{express?.map((x, index) => {
+                  return showLine === 'express' ?
+                    <li key={index} className="list-item" onClick={() => setSelectedLine(`${x.id} - ${x.name} (${x.direction})`)}>
+                      {`${x.id} - ${x.name} (${x.direction})`}
+                    </li> : ''})}
+                </ul>
+
+                {/* SHUTTLE */}
                 <span className={`list-el ${showLine === 'shuttle' ? 'active' : ''}`} onClick={() => setLine('shuttle')}>Navettes</span>
-                <ul>{shuttle?.map((x, index) => {return showLine === 'shuttle' ? <li key={index} className="list-item">{`${x.id} - ${x.name} (${x.direction})`}</li> : ''})}</ul>
+                <ul>{shuttle?.map((x, index) => {
+                  return showLine === 'shuttle' ?
+                    <li key={index} className="list-item" onClick={() => setSelectedLine(`${x.id} - ${x.name} (${x.direction})`)}>
+                      {`${x.id} - ${x.name} (${x.direction})`}
+                    </li> : ''})}
+                </ul>
+
+                {/* SHUTTLE OR */}
                 <span className={`list-el ${showLine === 'shuttleOr' ? 'active' : ''}`} onClick={() => setLine('shuttleOr')}>Navettes Or</span>
-                <ul>{shuttleOr?.map((x, index) => {return showLine === 'shuttleOr' ? <li key={index} className="list-item">{`${x.id} - ${x.name} (${x.direction})`}</li> : ''})}</ul>
+                <ul>{shuttleOr?.map((x, index) => {
+                  return showLine === 'shuttleOr' ?
+                    <li key={index} className="list-item" onClick={() => setSelectedLine(`${x.id} - ${x.name} (${x.direction})`)}>
+                      {`${x.id} - ${x.name} (${x.direction})`}
+                    </li> : ''})}
+                </ul>
               </div>
 
               <div className="main-section table-container">
                 {/* TODO: Dynamic table text */}
-                <span>10 De Lorimier - SUD</span>
+                <span>{selectedLine}</span>
                 <table>
                   <tbody>
                     <tr>
@@ -73,7 +117,13 @@ const APP:FC<patate> = ({handleClick, map}) =>{
               </div> */}
             </div>
             {/* TODO: coordonées */}
-            <div className="Footer">-- COORDS --</div>
+            <div className="Footer">
+              Equipe #10 <br/>
+              Etienne Fullum - Etienne.Fullum.1@ens.etsmtl.ca <br/>
+              Guillaume Leblanc - Guillaume.Leblanc.1@ens.etsmtl.ca <br/>
+              Joel Arsenault - Joel.Arsenault.1@ens.etsmtl.ca <br/>
+              Loic Fettich - Loic.Fettich.1@ens.etsmtl.ca <br/>
+            </div>
           </div>
         </div>
       );
