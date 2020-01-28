@@ -1,14 +1,16 @@
 import React, { FC, useEffect, useState } from 'react';
 import './App.css';
-import { line, CategoryTypes, category } from './Container';
+import { line, CategoryTypes, category, stop } from './Container';
+import { isNullOrUndefined } from 'util';
 
 export interface patate {
   handleClick: (event: React.MouseEvent<HTMLElement>) => void;
   map: Map<string, line[]>;
   categories?: category[];
+  stops: any;
 }
 
-const APP: FC<patate> = ({ handleClick, map, categories }) => {
+const APP: FC<patate> = ({ handleClick, map, categories, stops }) => {
   const locals = map.get(CategoryTypes.LOCAL);
   const night = map.get(CategoryTypes.NIGHT);
   const express = map.get(CategoryTypes.EXPRESS);
@@ -22,9 +24,25 @@ const APP: FC<patate> = ({ handleClick, map, categories }) => {
 
   const [showLine, setLine] = useState('');
   const [selectedLine, setSelectedLine] = useState('');
-  console.log(categories)
-  console.log("zzz")
-  console.log(shuttleOr)
+
+  const getLinebyId = (id: string): line => {
+    return all.find(x => x.id === id)!;
+  }
+
+  const line = getLinebyId(selectedLine || '');
+
+  const getStopsByLine = (line: line): stop[] => {
+    
+    const id = `${line.id}-${line.direction.charAt(0)}`;
+    console.log(id);
+    
+    return stops[id] as stop[];
+  }
+
+  const stop = line === undefined ? undefined : getStopsByLine(line);
+  console.log(stop);
+  
+
   return (
     <div className="App">
       <div className="wrapper">
@@ -59,7 +77,7 @@ const APP: FC<patate> = ({ handleClick, map, categories }) => {
                     key={index}
                     className="list-item"
                     onClick={() =>
-                      setSelectedLine(`${x.id} - ${x.name} (${x.direction})`)
+                      setSelectedLine(`${x.id}`)
                     }
                   >
                     {`${x.id} - ${x.name} (${x.direction})`}
@@ -86,7 +104,7 @@ const APP: FC<patate> = ({ handleClick, map, categories }) => {
                     key={index}
                     className="list-item"
                     onClick={() =>
-                      setSelectedLine(`${x.id} - ${x.name} (${x.direction})`)
+                      setSelectedLine(`${x.id}`)
                     }
                   >
                     {`${x.id} - ${x.name} (${x.direction})`}
@@ -113,7 +131,7 @@ const APP: FC<patate> = ({ handleClick, map, categories }) => {
                     key={index}
                     className="list-item"
                     onClick={() =>
-                      setSelectedLine(`${x.id} - ${x.name} (${x.direction})`)
+                      setSelectedLine(`${x.id}`)
                     }
                   >
                     {`${x.id} - ${x.name} (${x.direction})`}
@@ -140,7 +158,7 @@ const APP: FC<patate> = ({ handleClick, map, categories }) => {
                     key={index}
                     className="list-item"
                     onClick={() =>
-                      setSelectedLine(`${x.id} - ${x.name} (${x.direction})`)
+                      setSelectedLine(`${x.id}`)
                     }
                   >
                     {`${x.id} - ${x.name} (${x.direction})`}
@@ -167,7 +185,7 @@ const APP: FC<patate> = ({ handleClick, map, categories }) => {
                     key={index}
                     className="list-item"
                     onClick={() =>
-                      setSelectedLine(`${x.id} - ${x.name} (${x.direction})`)
+                      setSelectedLine(`${x.id}`)
                     }
                   >
                     {`${x.id} - ${x.name} (${x.direction})`}
@@ -196,7 +214,7 @@ const APP: FC<patate> = ({ handleClick, map, categories }) => {
                     key={index}
                     className="list-item"
                     onClick={() =>
-                      setSelectedLine(`${x.id} - ${x.name} (${x.direction})`)
+                      setSelectedLine(`${x.id}`)
                     }
                   >
                     {`${x.id} - ${x.name} (${x.direction})`}
@@ -227,6 +245,7 @@ const APP: FC<patate> = ({ handleClick, map, categories }) => {
           </div> */}
           <div className="main-section table-container">
             {/* TODO: Dynamic table text */}
+        <span>{selectedLine === '' ? '' : getLinebyId(selectedLine).name}</span>
             <table>
               <tbody>
                 <tr>
@@ -237,8 +256,8 @@ const APP: FC<patate> = ({ handleClick, map, categories }) => {
                 </tr>
                 <tr>
                   {/* TODO: Dynamic data */}
-                  <td>De Lorimier / Crémazie</td>
-                  <td>51133</td>
+        <td>{stop === undefined ? '' : stop![0].name}</td>
+              <td>{stop === undefined ? '' : stop![0].id}</td>
                   <td>[ ... ]</td>
                   <td>+</td>
                 </tr>

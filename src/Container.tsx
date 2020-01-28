@@ -40,7 +40,9 @@ export interface line{ // les lignes contiennes les autre shits
 }  
 
 export interface stop{
-  arrival:arrival[]
+  arrival?:arrival[];
+  id: string;
+  name: string;
 }  
 
 export interface arrival{
@@ -64,19 +66,22 @@ const fetchData = () : category[] => {
 } 
 
 
-class Container extends React.Component<{}, {line: line[], lineMap: Map<string, line[]>, categories2:category[]}>
+class Container extends React.Component<{}, {line: line[], lineMap: Map<string, line[]>, categories2:category[], stops: any}>
 {
   constructor(props: any) {
     super(props);
     this.state = {
       line: [],
       lineMap : new Map<string, line[]>(), 
-      categories2 : fetchData()
+      categories2 : fetchData(),
+      stops: undefined
     }
   }
 
   componentWillMount(){
     const line:line[] = linesFile.map(x=>x)
+
+    
     // const categories:category[] = linesFile.map<category>(
     //   (key)=>({
     //     name:key.name
@@ -104,7 +109,6 @@ class Container extends React.Component<{}, {line: line[], lineMap: Map<string, 
 
   refresh = ():void => {
     setTimeout( () =>  {
-      console.log("TIC")
       this.setState({categories2:fetchData()})
       return this.refresh() 
     }, 5000);
@@ -113,7 +117,12 @@ class Container extends React.Component<{}, {line: line[], lineMap: Map<string, 
     
   } 
   render() {
-    return <App {...this.state} handleClick={this.handleClick} map={this.state.lineMap} categories={this.state.categories2} />
+    return <App {...this.state}
+              handleClick={this.handleClick}
+              map={this.state.lineMap}
+              categories={this.state.categories2}
+              stops={stopsFile}
+            />
   }
 };
 
