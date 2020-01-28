@@ -24,7 +24,7 @@ Lines Json
 ex:
 [ 
    { 
-      "category":"local",
+      "category":"local", (reseau)
       "direction":"Sud",
       "id":"10",
       "name":"De Lorimier"
